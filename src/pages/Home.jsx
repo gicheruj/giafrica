@@ -6,21 +6,12 @@ import leadImg from '../assets/Hero/lead.png'
 
 const heroSlides = [
   {
-    num: '01',
-    tag: 'Transform',
-    text: 'Turning beauty ideas into impactful, scalable businesses.',
     image: transformImg,
   },
   {
-    num: '02',
-    tag: 'Innovate',
-    text: 'Driven by data, creativity and technology to shape the future of beauty in Africa.',
     image: innovateImg,
   },
   {
-    num: '03',
-    tag: 'Lead',
-    text: 'Empowering women to lead, collaborate and build a legacy that inspires generations.',
     image: leadImg,
   },
 ]
