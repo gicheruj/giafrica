@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Adorn from '../assets/Ecosystem/Adorn.png'
-import Rembeka from '../assets/Ecosystem/Rembeka.png'
+import Rembeka from '../assets/Ecosystem/Rembeka.jpg'
+import IVA from '../assets/Ecosystem/IVA.jpg'
 
 const engines = [
   {
