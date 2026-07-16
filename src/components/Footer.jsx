@@ -1,4 +1,10 @@
 import { Link } from 'react-router-dom'
+import Adorn from '../assets/Ecosystem/Adorn.png'
+import IVA from '../assets/Ecosystem/IVA.jpg'
+import Rembeka from '../assets/Ecosystem/Rembeka.jpg'
+import Heva from '../assets/Partners/Heva.jpg'
+import Kami from '../assets/Partners/Kami.jpg'
+import Wowzi from '../assets/Partners/Wowzi.jpg'
 
 const pages = [
   { name: 'Home', path: '/' },
@@ -14,16 +20,14 @@ const contact = [
   { label: 'Location', value: 'Westlands, Nairobi', href: null },
 ]
 
-// Placeholder text-logos until brand/partner logo image assets are supplied.
-// Swap each `name` entry for an <img src={logo} alt={name} /> when files arrive.
 const logos = [
-  'Rembeka Online',
-  'IVA Cosmetics',
-  'Adorn Africa',
-  'Kami Konsult',
-  'AfriNext Ventures',
-  'Wowzi',
-  'HEVA Fund',
+  { name: 'Rembeka Online', image: Rembeka },
+  { name: 'IVA Cosmetics', image: IVA },
+  { name: 'Adorn Africa', image: Adorn },
+  { name: 'Kami Konsult', image: Kami },
+  // { name: 'AfriNext Ventures', image: null },
+  { name: 'Wowzi', image: Wowzi },
+  { name: 'HEVA Fund', image: Heva },
 ]
 
 const LogoSlider = () => {
@@ -35,14 +39,22 @@ const LogoSlider = () => {
       <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#0B2A4A] to-transparent z-10" />
 
       <div className="flex w-max animate-[logo-scroll_28s_linear_infinite] gap-4">
-        {track.map((name, i) => (
+        {track.map((logo, i) => (
           <div
-            key={`${name}-${i}`}
-            className="flex items-center justify-center border border-[#C9963A]/25 rounded-sm px-8 py-4 whitespace-nowrap"
+            key={`${logo.name}-${i}`}
+            className="flex items-center justify-center px-6 whitespace-nowrap h-16"
           >
-            <span className="font-serif text-white/50 text-sm tracking-wide">
-              {name}
-            </span>
+            {logo.image ? (
+              <img
+                src={logo.image}
+                alt={logo.name}
+                className="max-h-12 max-w-[160px] object-contain"
+              />
+            ) : (
+              <span className="font-serif text-white/50 text-sm tracking-wide">
+                {logo.name}
+              </span>
+            )}
           </div>
         ))}
       </div>
