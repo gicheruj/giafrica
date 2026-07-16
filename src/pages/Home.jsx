@@ -115,7 +115,7 @@ const Home = () => {
     <div className="bg-[#FAF6EF]">
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-[#FAF6EF] min-h-[92vh] grid grid-cols-1 md:grid-cols-2">
+      <section className="relative overflow-hidden bg-[#0B2A4A] min-h-[92vh] grid grid-cols-1 md:grid-cols-2">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.05]"
           style={{
@@ -129,30 +129,33 @@ const Home = () => {
         {/* Left */}
         <div className="flex flex-col justify-center px-6 md:px-16 py-20 md:py-24 relative z-10">
           <div className="flex items-center gap-3 mb-7">
-            <div className="w-10 h-px bg-[#C9963A]" />
+            {/* <div className="w-10 h-px bg-[#C9963A]" /> */}
             <span className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase">
-              Transform · Innovate · Lead
+              <span className="block mb-1">G-AFRICA BEAUTY</span>
+              <span className="block">Building Africa's Next Generation of Beauty Business</span>
             </span>
           </div>
-          <h1 className="font-serif text-[#0B2A4A] text-4xl md:text-6xl font-bold leading-[1.1] mb-6">
-            Building Africa's Next Generation of{' '}
-            <em className="text-[#C9963A] not-italic">Beauty Businesses.</em>
+          <h1 className="font-serif text-white text-4xl md:text-6xl font-bold leading-[1.1] mb-6 flex flex-col">
+            <span>Transform</span>
+            <em className="text-[#C9963A] not-italic">Innovate</em>
+            <span>Lead</span>
           </h1>
-          <p className="text-[#0B2A4A]/65 text-base font-light leading-relaxed max-w-md mb-10">
-            G-AFRICA Beauty connects commerce, data and innovation to
-            transform beauty ideas into scalable African businesses.
+
+          <p className="text-white/65 text-base font-light leading-relaxed max-w-md mb-10">
+            G-AFRICA Beauty connects innovation, commerce and technology to
+            build brands, transforming beauty across Africa.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <Link
               to="/ecosystem"
-              className="bg-[#0B2A4A] text-white text-xs font-bold tracking-widest uppercase px-9 py-4 rounded-sm hover:bg-[#C9963A] hover:text-[#0B2A4A] transition-colors duration-200"
+              className="bg-[#C9963A] text-[#0B2A4A] text-xs font-bold tracking-widest uppercase px-9 py-4 rounded-sm hover:bg-white transition-colors duration-200"
             >
               Explore Our Ecosystem
             </Link>
             <Link
               to="/partner"
-              className="border border-[#0B2A4A]/25 text-[#0B2A4A] text-xs font-medium tracking-widest uppercase px-9 py-4 rounded-sm hover:border-[#C9963A] hover:text-[#C9963A] transition-colors duration-200"
+              className="border border-white/25 text-white text-xs font-medium tracking-widest uppercase px-9 py-4 rounded-sm hover:border-[#C9963A] hover:text-[#C9963A] transition-colors duration-200"
             >
               Partner With Us
             </Link>
