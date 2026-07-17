@@ -1,23 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import transformImg from '../assets/Hero/transform.png'
-import innovateImg from '../assets/Hero/innovate.png'
-import leadImg from '../assets/Hero/lead.png'
+import lead from '../assets/Hero/lead.png'
 import Rembeka from '../assets/Ecosystem/Rembeka.jpg'
 import IVA from '../assets/Ecosystem/IVA.jpg'
 import Adorn from '../assets/Ecosystem/Adorn.png'
-
-const heroSlides = [
-  {
-    image: transformImg,
-  },
-  {
-    image: innovateImg,
-  },
-  {
-    image: leadImg,
-  },
-]
 
 const stats = [
   { value: '2022', label: 'Operating in Kenya Since' },
@@ -68,142 +53,12 @@ const partnerCategories = [
   'Investors & Strategic Partners',
 ]
 
-const StatCounter = ({ value, duration = 1500 }) => {
-  const match = value.match(/^([^\d]*)([\d,]+)(.*)$/)
-  const [display, setDisplay] = useState(match ? `${match[1]}0${match[3]}` : value)
-  const ref = useRef(null)
-  const started = useRef(false)
-
-  useEffect(() => {
-    if (!match) return
-    const [, prefix, numStr, suffix] = match
-    const target = parseInt(numStr.replace(/,/g, ''), 10)
-    const hasComma = numStr.includes(',')
-    const formatNum = (n) => (hasComma ? n.toLocaleString() : String(n))
-
-    const node = ref.current
-    if (!node) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true
-          const startTime = performance.now()
-
-          const step = (now) => {
-            const progress = Math.min((now - startTime) / duration, 1)
-            const eased = 1 - Math.pow(1 - progress, 3) 
-            const current = Math.round(eased * target)
-            setDisplay(`${prefix}${formatNum(current)}${suffix}`)
-            if (progress < 1) requestAnimationFrame(step)
-          }
-          requestAnimationFrame(step)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.4 }
-    )
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [value, duration])
-
-  return <span ref={ref}>{display}</span>
-}
-
-const goldParticles = [
-  { top: '15%', left: '20%', size: 3, delay: '0s', duration: '4s' },
-  { top: '30%', left: '72%', size: 2, delay: '1.2s', duration: '5s' },
-  { top: '58%', left: '35%', size: 4, delay: '2.1s', duration: '4.5s' },
-  { top: '72%', left: '82%', size: 2, delay: '0.6s', duration: '6s' },
-  { top: '22%', left: '50%', size: 3, delay: '3s', duration: '5.5s' },
-  { top: '85%', left: '15%', size: 2, delay: '1.8s', duration: '4.2s' },
-  { top: '45%', left: '90%', size: 3, delay: '2.6s', duration: '4.8s' },
-]
-
-const HeroCarousel = () => {
-  const [active, setActive] = useState(0)
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActive((prev) => (prev + 1) % heroSlides.length)
-    }, 5000)
-    return () => clearInterval(timer)
-  }, [])
-
-  return (
-    <div className="relative w-full h-[340px] sm:h-[420px] md:h-[480px] lg:h-[560px] rounded-2xl overflow-hidden">
-      {heroSlides.map((slide, i) => (
-        <div
-          key={slide.tag}
-          className={`absolute inset-0 transition-all duration-700 ease-out ${
-            i === active
-              ? 'opacity-100 translate-x-0'
-              : i < active
-                ? 'opacity-0 -translate-x-4'
-                : 'opacity-0 translate-x-4'
-          }`}
-        >
-          <img
-            src={slide.image}
-            alt={slide.tag}
-            className="w-full h-full object-contain"
-          />
-
-          {/* Gold Particles */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {goldParticles.map((p, idx) => (
-              <span
-                key={idx}
-                className="absolute rounded-full bg-[#C9963A]"
-                style={{
-                  top: p.top,
-                  left: p.left,
-                  width: `${p.size}px`,
-                  height: `${p.size}px`,
-                  boxShadow: '0 0 6px 1px rgba(201,150,58,0.6)',
-                  animation: `gold-particle-float ${p.duration} ease-in-out ${p.delay} infinite`,
-                }}
-              />
-            ))}
-            <div className="absolute inset-0 hero-light-streak" />
-          </div>
-        </div>
-      ))}
-
-      {/* Dot navigation */}
-      <div className="absolute top-4 right-4 flex gap-2 z-10">
-        {heroSlides.map((slide, i) => (
-          <button
-            key={slide.tag}
-            onClick={() => setActive(i)}
-            aria-label={`Show ${slide.tag} slide`}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              i === active ? 'w-6 bg-[#C9963A]' : 'w-1.5 bg-white/40 hover:bg-white/70'
-            }`}
-          />
-        ))}
-      </div>
-
-      <style>{`
-        @keyframes gold-particle-float {
-          0%, 100% { transform: translateY(0) scale(1); opacity: 0.25; }
-          50% { transform: translateY(-8px) scale(1.4); opacity: 0.9; }
-        }
-        @keyframes hero-streak-sweep {
-          0%, 20% { transform: translateX(-150%); }
-          45%, 100% { transform: translateX(150%); }
-        }
-      `}</style>
-    </div>
-  )
-}
-
 const Home = () => {
   return (
     <div className="bg-[#FAF6EF]">
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-[#0B2A4A] min-h-[92vh] grid grid-cols-1 md:grid-cols-2">
+      <section className="relative overflow-hidden bg-[#FAF6EF] min-h-[92vh] grid grid-cols-1 md:grid-cols-2">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.05]"
           style={{
@@ -217,48 +72,50 @@ const Home = () => {
         {/* Left */}
         <div className="flex flex-col justify-center px-6 md:px-16 py-20 md:py-24 relative z-10">
           <div className="flex items-center gap-3 mb-7">
+            <div className="w-10 h-px bg-[#C9963A]" />
             <span className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase">
-              <span className="block mb-1">G-AFRICA BEAUTY</span>
-              <span className="block">Building Africa's Next Generation of Beauty Business</span>
+              Transform · Innovate · Lead
             </span>
           </div>
-          <h1 className="font-serif text-white text-4xl md:text-6xl font-bold leading-[1.1] mb-6 flex flex-col">
-            <span>Transform</span>
-            <em className="text-[#C9963A] not-italic">Innovate</em>
-            <span>Lead</span>
+          <h1 className="font-serif text-[#0B2A4A] text-4xl md:text-6xl font-bold leading-[1.1] mb-6">
+            Building Africa's Next Generation of{' '}
+            <em className="text-[#C9963A] not-italic">Beauty Businesses.</em>
           </h1>
-
-          <p className="text-white/65 text-base font-light leading-relaxed max-w-md mb-10">
-            G-AFRICA Beauty connects innovation, commerce and technology to
-            build brands, transforming beauty across Africa.
+          <p className="text-[#0B2A4A]/65 text-base font-light leading-relaxed max-w-md mb-10">
+            G-AFRICA Beauty connects commerce, data and innovation to
+            transform beauty ideas into scalable African businesses.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <Link
               to="/ecosystem"
-              className="bg-[#C9963A] text-[#0B2A4A] text-xs font-bold tracking-widest uppercase px-9 py-4 rounded-sm hover:bg-white transition-colors duration-200"
+              className="bg-[#0B2A4A] text-white text-xs font-bold tracking-widest uppercase px-9 py-4 rounded-sm hover:bg-[#C9963A] hover:text-[#0B2A4A] transition-colors duration-200"
             >
               Explore Our Ecosystem
             </Link>
             <Link
               to="/partner"
-              className="border border-white/25 text-white text-xs font-medium tracking-widest uppercase px-9 py-4 rounded-sm hover:border-[#C9963A] hover:text-[#C9963A] transition-colors duration-200"
+              className="border border-[#0B2A4A]/25 text-[#0B2A4A] text-xs font-medium tracking-widest uppercase px-9 py-4 rounded-sm hover:border-[#C9963A] hover:text-[#C9963A] transition-colors duration-200"
             >
               Partner With Us
             </Link>
           </div>
         </div>
 
-        {/* Right — Sliding image carousel */}
-        <div className="flex items-center justify-center px-2 md:px-4 py-6 md:py-10 relative z-10">
-          <div className="w-full">
-            <HeroCarousel />
+        {/* Right — Single hero image */}
+        <div className="flex items-center justify-center px-4 md:px-8 py-6 md:py-10 relative z-10">
+          <div className="relative w-full h-[360px] sm:h-[440px] md:h-[500px] lg:h-[560px] rounded-2xl overflow-hidden">
+            <img
+              src={lead}
+              alt="G-Africa Beauty"
+              className="absolute inset-0 w-full h-full object-contain"
+            />
           </div>
         </div>
       </section>
 
       {/* ── Brand Story, In Numbers ── */}
-      <section className="px-6 md:px-16 py-16 md:py-20 bg-[#FAF6EF] border-b border-[#EAE6DF]">
+      {/* <section className="px-6 md:px-16 py-16 md:py-20 bg-[#FAF6EF] border-b border-[#EAE6DF]">
         <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-8 text-center md:text-left">
           The Brand Story, In Numbers
         </div>
@@ -273,7 +130,7 @@ const Home = () => {
               }`}
             >
               <div className="font-serif text-[#0B2A4A] text-3xl md:text-4xl font-bold leading-none mb-2">
-                <StatCounter value={stat.value} />
+                {stat.value}
               </div>
               <div className="text-[#0B2A4A]/50 text-[10px] md:text-xs font-medium tracking-widest uppercase">
                 {stat.label}
@@ -281,7 +138,7 @@ const Home = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* ── The G-Africa Difference ── */}
       <section className="px-6 md:px-16 py-20 md:py-28 bg-[#FAF6EF] grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20 items-start">
@@ -359,10 +216,10 @@ const Home = () => {
       {/* ── How the Model Works ── */}
       <section className="px-6 md:px-16 py-20 md:py-28 bg-[#FAF6EF]">
         <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
-          How It Fits Together
+          How the Model Works
         </div>
         <h2 className="font-serif text-[#111111] text-3xl md:text-4xl font-bold leading-[1.15] mb-14 max-w-2xl">
-          One Ecosystem. Three Brands. Stronger Growth.
+          One Ecosystem. Three Engines. Stronger Growth.
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {flow.map((step, i) => (
@@ -406,6 +263,37 @@ const Home = () => {
           </p>
         </div>
       </section>
+
+      {/* ── Growth Journey (teaser) ── */}
+      {/* <section className="bg-[#FAF6EF] px-6 md:px-16 py-20 md:py-28">
+        <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
+          Roadmap
+        </div>
+        <h2 className="font-serif text-[#111111] text-3xl md:text-4xl font-bold leading-[1.15] mb-14 max-w-2xl">
+          Commercial Launch Now. Owned Manufacturing Next.
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          {timeline.map((item) => (
+            <div
+              key={item.period}
+              className="bg-white border border-[#EAE6DF] rounded-lg p-6"
+            >
+              <div className="text-[#C9963A]/70 font-serif text-base font-bold mb-2 tracking-wide">
+                {item.period}
+              </div>
+              <h3 className="font-serif text-[#111111] text-lg font-bold">
+                {item.title}
+              </h3>
+            </div>
+          ))}
+        </div>
+        <Link
+          to="/info"
+          className="text-[#0B2A4A] text-xs font-semibold tracking-widest uppercase inline-flex items-center gap-2 hover:gap-4 hover:text-[#C9963A] transition-all duration-200"
+        >
+          See the Full Roadmap →
+        </Link>
+      </section> */}
 
       {/* ── Partnership Invitation (CTA) ── */}
       <section className="relative overflow-hidden px-6 md:px-16 py-20 md:py-28 bg-[#FAF6EF] border-t border-[#EAE6DF]">
