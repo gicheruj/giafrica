@@ -6,37 +6,48 @@ const team = [
     name: 'Dr. Millicent Wanjeri Loice',
     role: 'Founder & CEO',
     bio: 'A medical doctor turned tech entrepreneur, Dr. Millicent brings over eight years of strategic and business development experience to G-AFRICA. Her background at the intersection of healthcare, technology and commerce drives the company\'s human-centred approach to building Africa\'s beauty economy.',
-    linkedin: null,
+    linkedin: '#',
   },
   {
     initials: 'EN',
     name: 'Enid Njuguna',
     role: 'Chief Operating Officer',
     bio: 'Oversees day-to-day operations, driving execution and operational excellence across all three engines of the ecosystem.',
-    linkedin: null,
+    linkedin: '#',
   },
   {
     initials: 'JG',
     name: 'John Maina Gicheru',
     role: 'Tech Lead',
     bio: 'Leads technology strategy and platform development across the G-AFRICA ecosystem.',
-    linkedin: null,
+    linkedin: '#',
   },
   {
     initials: 'AO',
     name: 'Angela Omurunga',
     role: 'Tech Product Owner',
     bio: 'Owns product direction for G-AFRICA\'s technology platforms, translating strategy into shipped features.',
-    linkedin: null,
+    linkedin: '#',
   },
   {
     initials: 'IN',
     name: 'Ian Njue',
     role: 'Brand & Marketing Lead',
     bio: 'Leads brand strategy and marketing across Rembeka, IVA and Adorn.',
-    linkedin: null,
+    linkedin: '#',
   },
 ]
+
+const LinkedInIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="w-4 h-4"
+    aria-hidden="true"
+  >
+    <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z" />
+  </svg>
+)
 
 const Team = () => {
   return (
@@ -61,45 +72,59 @@ const Team = () => {
       </section>
 
       {/* ── Team Grid ── */}
-      <section className="px-6 md:px-16 py-16 md:py-24">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="px-6 md:px-16 py-16 md:py-24 bg-[#FAF6EF]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {team.map((person) => (
             <div
               key={person.name}
-              className="group relative overflow-hidden rounded-lg border border-[#EAE6DF] bg-[#FAFAFA]"
+              className="group relative overflow-hidden rounded-2xl border border-[#EAE6DF] bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
-              {/* Photo placeholder */}
-              <div className="relative aspect-[3/4] bg-[#0B2A4A] flex items-center justify-center overflow-hidden">
-                <span className="font-serif text-[#C9963A]/40 text-5xl font-bold">
-                  {person.initials}
-                </span>
+              {/* Portrait area — ivory, with initials monogram and hover bio */}
+              <div className="relative aspect-[3/4] bg-[#FAF6EF] overflow-hidden">
+                <div
+                  className="absolute inset-0 opacity-[0.06]"
+                  style={{
+                    backgroundImage:
+                      'radial-gradient(circle at 1px 1px, #C9963A 1px, transparent 0)',
+                    backgroundSize: '24px 24px',
+                  }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-28 h-28 rounded-full border border-[#C9963A]/30 flex items-center justify-center">
+                    <span className="font-serif text-[#0B2A4A] text-3xl font-bold tracking-wide">
+                      {person.initials}
+                    </span>
+                  </div>
+                </div>
 
                 {/* Hover bio overlay */}
                 <div className="absolute inset-0 flex flex-col justify-end bg-[#0B2A4A]/95 p-6 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                  <p className="text-white/80 text-sm leading-relaxed mb-4">
+                  <p className="text-white/80 text-sm leading-relaxed">
                     {person.bio}
                   </p>
-                  {person.linkedin && (
-                    <a
-                      href={person.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#C9963A] text-xs font-semibold tracking-[2px] uppercase hover:text-white transition-colors duration-200 self-start"
-                    >
-                      LinkedIn →
-                    </a>
-                  )}
                 </div>
               </div>
 
-              {/* Name / role — always visible */}
-              <div className="p-6">
-                <h3 className="font-serif text-[#111111] text-lg font-bold mb-1">
-                  {person.name}
-                </h3>
-                <div className="text-[#C9963A] text-xs font-semibold tracking-[2px] uppercase">
-                  {person.role}
+              {/* Name / role + LinkedIn button */}
+              <div className="p-6 flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="font-serif text-[#111111] text-lg font-bold mb-1">
+                    {person.name}
+                  </h3>
+                  <div className="text-[#C9963A] text-xs font-semibold tracking-[2px] uppercase">
+                    {person.role}
+                  </div>
                 </div>
+
+                <a
+                  href={person.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${person.name} on LinkedIn`}
+                  className="shrink-0 w-9 h-9 rounded-full border border-[#0B2A4A]/20 text-[#0B2A4A] flex items-center justify-center transition-colors duration-200 hover:bg-[#0B2A4A] hover:text-white hover:border-[#0B2A4A]"
+                >
+                  <LinkedInIcon />
+                </a>
               </div>
             </div>
           ))}

@@ -162,7 +162,7 @@ const Partner = () => {
         </div>
       </section>
 
-      {/* ── Track Record ── */}
+      {/* ── Track Record ── 
       <section className="bg-[#FAFAFA] px-6 md:px-16 py-20 md:py-28">
         <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
           Track Record
@@ -205,6 +205,7 @@ const Partner = () => {
           ))}
         </div>
       </section>
+      */}
 
       {/* ── Start a Partnership Conversation (single focused action) ── */}
       <section className="relative overflow-hidden bg-[#0B2A4A] px-6 md:px-16 py-20 md:py-28">

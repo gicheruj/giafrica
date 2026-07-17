@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-// import commercialisationImg from '../assets/Capability/commercialisation.jpg'
-// import distributionImg from '../assets/Capability/distribution.jpg'
-// import innovationImg from '../assets/Capability/innovation.jpg'
-// import dataImg from '../assets/Capability/data.jpg'
+import commercialisation from '../assets/Info/commercialisation.png'
+import distribution from '../assets/Info/distribution.png'
+import innovation from '../assets/Info/innovate.png'
+import data from '../assets/Info/data-led.png'
 
 const stats = [
   { value: '2022', label: 'Operating in Kenya Since' },
@@ -17,37 +17,37 @@ const pillars = [
     num: '01',
     title: 'Commercialisation',
     text: 'Go-to-market, partnerships and market entry that turn beauty ideas into revenue.',
-    // image: commercialisationImg,
+    image: commercialisation,
   },
   {
     num: '02',
     title: 'Beauty Distribution',
     text: 'Retail, reselling and supply-chain development that gets products where customers are.',
-    // image: distributionImg,
+    image: distribution,
   },
   {
     num: '03',
     title: 'Innovation',
     text: 'Locally relevant proprietary products, built for African skin, hair and budgets.',
-    // image: innovationImg,
+    image: innovation,
   },
   {
     num: '04',
     title: 'Data-Led Growth',
     text: 'Marketplace signals that sharpen what we sell, make and scale next.',
-    // image: dataImg,
+    image: data,
   },
 ]
 
 // Year-by-year roadmap for the gold line/dot graphic — one 2-word beat per year.
 const roadmapYears = [
-  { year: 2022, desc: 'Idea' },
-  { year: 2023, desc: 'Research' },
-  { year: 2024, desc: 'Validation' },
-  { year: 2025, desc: 'Launch' },
-  { year: 2026, desc: 'Commercial Expansion' },
-  { year: 2027, desc: 'Distribution' },
-  { year: 2028, desc: 'Manufacturing' },
+  { year: 2022, desc: 'Ecosystem Founded' },
+  { year: 2023, desc: 'Building Foundations' },
+  { year: 2024, desc: 'Validating Model' },
+  { year: 2025, desc: 'Adorn Launches' },
+  { year: 2026, desc: 'Commercial Launch' },
+  { year: 2027, desc: 'Distribution Scale' },
+  { year: 2028, desc: 'Local Manufacturing' },
 ]
 
 const LINE_END_INDEX = 4 // index of 2026 — the gold line runs up to here
@@ -142,47 +142,40 @@ const Info = () => {
           className="pointer-events-none absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
-              'radical-gradient(circle at 1px 1px, #C9963A 1px, transparent 0)',
+              'radial-gradient(circle at 1px 1px, #C9963A 1px, transparent 0)',
             backgroundSize: '28px 28px',
           }}
         />
         <div className="pointer-events-none absolute -top-40 left-[-10%] h-[520px] w-[520px] rounded-full bg-[#C9963A]/10 blur-[120px]" />
 
-        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-end">
           <div>
             <div className="flex items-center gap-3 mb-7">
               <div className="w-10 h-px bg-[#C9963A]" />
               <span className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase">
-                By the Numbers
+                Info
               </span>
             </div>
             <h1 className="font-serif text-[#0B2A4A] text-5xl md:text-7xl font-bold leading-[1.05]">
               Growth told in figures{' '}
               <em className="text-[#C9963A] not-italic">Not Paragraphs</em>
             </h1>
-            <br></br>
+          </div>
+          <div className="pb-2">
             <p className="text-[#4A5568] text-base font-light leading-[1.9] border-l-2 border-[#C9963A] pl-6 mb-8">
               Operating in Kenya since 2022, G-AFRICA Beauty connects
               strategy, commercialisation, technology and innovation.
             </p>
-          </div>
-          <div className="pb-2 mt-0 md:mt-2">
 
             {/* Numbers, counting up, right beside the hero copy */}
-            <div className="grid grid-cols-2 gap-8 pl-6">
-              {stats.map((item, index) => (
-                <div key={item.label} className="group relative">
-                  <div className="relative">
-                    <div className="font-serif text-[#0B2A4A] text-4xl md:text-5xl lg:text-6xl font-bold mb-1 tracking-tight">
-                      <span className="relative inline-block">
-                        <StatCounter value={item.value} />
-                        {/* Subtle underline accent */}
-                        <span className="absolute -bottom-1 left-0 w-8 h-0.5 bg-[#C9963A]/30 group-hover:w-full transition-all duration-700"></span>
-                      </span>
-                    </div>
-                    <div className="text-[#4A5568] text-sm md:text-base leading-snug font-light tracking-wide">
-                      {item.label}
-                    </div>
+            <div className="grid grid-cols-2 gap-6 pl-6">
+              {stats.map((item) => (
+                <div key={item.label}>
+                  <div className="font-serif text-[#0B2A4A] text-2xl md:text-3xl font-bold mb-1">
+                    <StatCounter value={item.value} />
+                  </div>
+                  <div className="text-[#4A5568] text-xs leading-snug">
+                    {item.label}
                   </div>
                 </div>
               ))}
@@ -196,7 +189,7 @@ const Info = () => {
         <YearRoadmap />
       </section>
 
-      {/* ── The G-AFRICA Difference ── */}
+      {/* ── The G-AFRICA Difference ── 
       <section className="bg-[#FAFAFA] px-6 md:px-16 py-20 md:py-28 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20 items-start">
         <div>
           <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
@@ -221,8 +214,9 @@ const Info = () => {
           </div>
         </div>
       </section>
+      */}
 
-      {/* ── Vision & Mission ── */}
+      {/* ── Vision & Mission ── 
       <section className="px-6 md:px-16 py-20 md:py-28">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {[
@@ -249,17 +243,18 @@ const Info = () => {
           ))}
         </div>
       </section>
+      */}
 
       {/* ── Capability Pillars ── */}
       <section className="relative overflow-hidden bg-[#0B2A4A] px-6 md:px-16 py-20 md:py-28">
         <div className="flex items-center gap-3 mb-5">
           <div className="w-10 h-px bg-[#C9963A]" />
           <span className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase">
-            Capability
+            WHAT WE DO
           </span>
         </div>
         <h2 className="font-serif text-white text-3xl md:text-5xl font-bold leading-[1.1] mb-4 max-w-2xl">
-          Commerce, Distribution, Innovation and Data
+          Four Pillars, shown - not explained
         </h2>
         <p className="text-white/60 text-base font-light leading-[1.9] max-w-2xl mb-16">
           Four connected capabilities, working together across every engine
@@ -272,11 +267,11 @@ const Info = () => {
               className="group relative bg-white/5 border border-white/10 rounded-lg overflow-hidden transition-all duration-300 hover:border-[#C9963A]/50 hover:-translate-y-1"
             >
               <div className="relative h-40 overflow-hidden">
-                {/* <img
+                <img
                   src={item.image}
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                /> */}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A4A]/85 via-[#0B2A4A]/15 to-transparent" />
                 <span className="absolute top-3 left-3 text-white/70 text-xs font-semibold tracking-[2px]">
                   {item.num}
