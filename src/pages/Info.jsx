@@ -8,7 +8,7 @@ import data from '../assets/Info/data-led.png'
 import rembeka1 from '../assets/Info/rembeka-1.jpg'
 import rembeka2 from '../assets/Info/rembeka-2.jpg'
 import adorn1 from '../assets/Info/adorn-1.jpg'
-// import adorn2 from '../assets/Info/adorn-2.png'
+import adorn2 from '../assets/Info/adorn-2.jpg'
 
 // import africaMap from '../assets/Info/africa-map.png'
 
@@ -64,7 +64,7 @@ const productShots = [
   { tag: 'Rembeka Online', image: rembeka1 },
   { tag: 'Rembeka Online', image: rembeka2 },
   { tag: 'Adorn Africa', image: adorn1 },
-  // { tag: 'Adorn Africa', image: adorn2 },
+  { tag: 'Adorn Africa', image: adorn2 },
 ]
 
 // Expansion markets shown below the Africa map card.
