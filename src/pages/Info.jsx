@@ -10,7 +10,7 @@ import rembeka2 from '../assets/Info/rembeka-2.jpg'
 import adorn1 from '../assets/Info/adorn-1.jpg'
 import adorn2 from '../assets/Info/adorn-2.jpg'
 
-// import africaMap from '../assets/Info/africa-map.png'
+import africaMap from '../assets/Info/africa-map.png'
 
 const stats = [
   { value: '2022', label: 'Operating in Kenya Since' },
@@ -69,9 +69,9 @@ const productShots = [
 
 // Expansion markets shown below the Africa map card.
 const expansionCountries = [
-  { name: 'Kenya', status: 'Home Market · Since 2022' },
-  { name: 'Uganda', status: 'Expansion Target' },
-  { name: 'Tanzania', status: 'Expansion Target' },
+  { name: 'Kenya', status: 'Current Operations' },
+  { name: 'Uganda', status: 'Coming Soon' },
+  { name: 'Tanzania', status: 'Future Market' },
 ]
 
 // Animates a stat value counting up from 0 to its target once it scrolls into view.
@@ -351,11 +351,11 @@ const Info = () => {
 
         <div className="max-w-4xl mx-auto bg-[#FAFAFA] border border-[#EAE6DF] rounded-2xl overflow-hidden">
           <div className="aspect-[16/10] md:aspect-[16/9] bg-white flex items-center justify-center p-8 md:p-14">
-            {/* <img
+            <img
               src={africaMap}
               alt="Outline map of Africa highlighting Kenya, Uganda and Tanzania"
               className="max-w-full max-h-full object-contain"
-            /> */}
+            /> 
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[#EAE6DF] border-t border-[#EAE6DF]">
             {expansionCountries.map((country) => (
