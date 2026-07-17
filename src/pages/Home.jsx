@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 import transformImg from '../assets/Hero/transform.png'
 import innovateImg from '../assets/Hero/innovate.png'
 import leadImg from '../assets/Hero/lead.png'
+import Rembeka from '../assets/Ecosystem/Rembeka.jpg'
+import IVA from '../assets/Ecosystem/IVA.jpg'
+import Adorn from '../assets/Ecosystem/Adorn.png'
 
 const heroSlides = [
   {
@@ -28,16 +31,19 @@ const engines = [
     num: '01',
     name: 'Rembeka Online',
     role: 'Data & Last-Mile Distribution',
+    image: Rembeka,
   },
   {
     num: '02',
     name: 'IVA Cosmetics',
     role: 'Commercial & Retail Distribution',
+    image: IVA,
   },
   {
     num: '03',
     name: 'Adorn Africa',
     role: 'Proprietary Brand & Innovation',
+    image: Adorn,
   },
 ]
 
@@ -316,22 +322,35 @@ const Home = () => {
             <em className="text-[#C9963A] not-italic">Three Brands.</em>
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#EAE6DF] rounded-lg overflow-hidden border border-[#EAE6DF] mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {engines.map((engine) => (
-            <div
+            <Link
               key={engine.num}
-              className="group bg-white p-8 md:p-10 transition-colors duration-300 hover:bg-[#0B2A4A]"
+              to="/ecosystem"
+              className="group relative block rounded-lg overflow-hidden border border-[#EAE6DF] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
-              <span className="block text-[#C9963A]/50 text-xs font-semibold tracking-[2px] mb-5 transition-colors duration-300 group-hover:text-[#C9963A]">
-                {engine.num}
-              </span>
-              <h3 className="font-serif text-[#111111] text-xl font-bold mb-2 transition-colors duration-300 group-hover:text-white">
-                {engine.name}
-              </h3>
-              <p className="text-[#C9963A] text-xs font-semibold tracking-[2px] uppercase">
-                {engine.role}
-              </p>
-            </div>
+              <div className="relative h-56 overflow-hidden">
+                <img
+                  src={engine.image}
+                  alt={engine.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A4A]/85 via-[#0B2A4A]/10 to-transparent" />
+                <span className="absolute top-4 left-4 text-white/80 text-xs font-semibold tracking-[3px]">
+                  {engine.num}
+                </span>
+                <div className="absolute bottom-4 left-5 right-5">
+                  <h3 className="font-serif text-white text-xl font-bold leading-tight">
+                    {engine.name}
+                  </h3>
+                </div>
+              </div>
+              <div className="p-6">
+                <p className="text-[#C9963A] text-xs font-semibold tracking-[2px] uppercase">
+                  {engine.role}
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
         <Link
