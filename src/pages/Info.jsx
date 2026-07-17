@@ -5,6 +5,13 @@ import distribution from '../assets/Info/distribution.png'
 import innovation from '../assets/Info/innovate.png'
 import data from '../assets/Info/data-led.png'
 
+import rembeka1 from '../assets/Info/rembeka-1.jpg'
+import rembeka2 from '../assets/Info/rembeka-2.jpg'
+import adorn1 from '../assets/Info/adorn-1.jpg'
+// import adorn2 from '../assets/Info/adorn-2.png'
+
+// import africaMap from '../assets/Info/africa-map.png'
+
 const stats = [
   { value: '2022', label: 'Operating in Kenya Since' },
   { value: '3', label: 'Integrated Beauty Engines' },
@@ -51,6 +58,21 @@ const roadmapYears = [
 ]
 
 const LINE_END_INDEX = 4 // index of 2026 — the gold line runs up to here
+
+// Product photography — two shots each for Rembeka and Adorn.
+const productShots = [
+  { tag: 'Rembeka Online', image: rembeka1 },
+  { tag: 'Rembeka Online', image: rembeka2 },
+  { tag: 'Adorn Africa', image: adorn1 },
+  // { tag: 'Adorn Africa', image: adorn2 },
+]
+
+// Expansion markets shown below the Africa map card.
+const expansionCountries = [
+  { name: 'Kenya', status: 'Home Market · Since 2022' },
+  { name: 'Uganda', status: 'Expansion Target' },
+  { name: 'Tanzania', status: 'Expansion Target' },
+]
 
 // Animates a stat value counting up from 0 to its target once it scrolls into view.
 // Understands prefixes/suffixes like "KSh " + "100" + "K", or "36" + "%".
@@ -287,6 +309,66 @@ const Info = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── Rembeka and Adorn: Product, Photographed ── */}
+      <section className="bg-[#0B2A4A] px-6 md:px-16 py-20 md:py-28">
+        <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
+          Rembeka and Adorn
+        </div>
+        <h2 className="font-serif text-white text-3xl md:text-5xl font-bold leading-[1.1] mb-14 max-w-2xl">
+          Product, Photographed
+        </h2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {productShots.map((shot, i) => (
+            <div
+              key={i}
+              className="group relative rounded-lg overflow-hidden aspect-[3/4] border border-white/10"
+            >
+              <img
+                src={shot.image}
+                alt={shot.tag}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A4A]/80 via-transparent to-transparent" />
+              <span className="absolute bottom-3 left-3 text-white text-[10px] font-semibold tracking-[2px] uppercase">
+                {shot.tag}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Expansion: Where We Are. Where We Are Going. ── */}
+      <section className="bg-white px-6 md:px-16 py-20 md:py-28">
+        <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
+          Expansion
+        </div>
+        <h2 className="font-serif text-[#111111] text-3xl md:text-5xl font-bold leading-[1.1] mb-14 max-w-2xl">
+          Where We Are. Where We Are Going.
+        </h2>
+
+        <div className="max-w-4xl mx-auto bg-[#FAFAFA] border border-[#EAE6DF] rounded-2xl overflow-hidden">
+          <div className="aspect-[16/10] md:aspect-[16/9] bg-white flex items-center justify-center p-8 md:p-14">
+            {/* <img
+              src={africaMap}
+              alt="Outline map of Africa highlighting Kenya, Uganda and Tanzania"
+              className="max-w-full max-h-full object-contain"
+            /> */}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[#EAE6DF] border-t border-[#EAE6DF]">
+            {expansionCountries.map((country) => (
+              <div key={country.name} className="p-6 text-center">
+                <h3 className="font-serif text-[#111111] text-xl font-bold mb-1">
+                  {country.name}
+                </h3>
+                <p className="text-[#C9963A] text-xs font-semibold tracking-[2px] uppercase">
+                  {country.status}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
