@@ -26,7 +26,7 @@ const brands = [
   {
     num: '01',
     name: 'Rembeka Online',
-    role: 'Data & Last-Mile Distribution',
+    role: 'COMMERCE',
     est: 'Est. 2022',
     image: Rembeka,
     shortText:
@@ -39,7 +39,7 @@ const brands = [
   {
     num: '02',
     name: 'IVA Cosmetics',
-    role: 'Commercial & Retail Distribution',
+    role: 'INFRASTRUCTURE',
     est: null,
     image: IVA,
     shortText:
@@ -52,7 +52,7 @@ const brands = [
   {
     num: '03',
     name: 'Adorn Africa',
-    role: 'Proprietary Brand & Innovation',
+    role: 'PRODUCT',
     est: 'Est. 2025',
     image: Adorn,
     shortText:
@@ -75,7 +75,7 @@ const BrandCard = ({ brand, onSelect }) => (
   <button
     type="button"
     onClick={() => onSelect(brand)}
-    className="group relative text-left rounded-2xl overflow-hidden border border-[#EAE6DF] bg-white hover:-translate-y-1 hover:shadow-xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9963A]"
+    className="group relative text-left rounded-2xl overflow-hidden border border-[#EAE6DF] bg-[#0B2A4A] hover:-translate-y-1 hover:shadow-xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9963A]"
   >
     <div className="relative h-80 md:h-96 lg:h-[26rem] overflow-hidden">
       <img
@@ -239,9 +239,6 @@ const Ecosystem = () => {
             <BrandCard key={brand.num} brand={brand} onSelect={setSelectedBrand} />
           ))}
         </div>
-        <p className="text-[#4A5568]/70 text-xs tracking-wide mt-6 text-center md:text-left">
-          Tap a card to see the full details for that brand.
-        </p>
       </section>
 
       <BrandModal brand={selectedBrand} onClose={() => setSelectedBrand(null)} />
