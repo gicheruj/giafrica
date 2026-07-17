@@ -1,7 +1,4 @@
 import { useState } from 'react'
-// import hevaLogo from '../assets/partners/heva-fund.png'
-// import afrinextLogo from '../assets/partners/afrinext-ventures.png'
-// import wowziLogo from '../assets/partners/wowzi.png'
 
 const categories = [
   {
@@ -26,30 +23,6 @@ const categories = [
   },
 ]
 
-const trackRecord = [
-  {
-    name: 'HEVA Fund',
-    // logo: hevaLogo,
-    sector: 'Creative Economy Investment',
-    text: 'An East African impact investment fund providing tailored financing and business support to creative economy enterprises across fashion, media, and the arts. GI-Africa holds a signed commercial agreement with HEVA Fund.',
-    url: 'https://www.hevafund.com/',
-  },
-  {
-    name: 'AfriNext Ventures',
-    // logo: afrinextLogo,
-    sector: 'Venture Capital',
-    text: 'A venture capital fund aggregating and supporting the next generation of disruptive, African-led, tech-driven startups from ideation to scale — sector-agnostic, with a focus on early-stage founders and honoring the authenticity of African heritage. AfriNext provided $100,000 in angel investment supporting startup sourcing, investment negotiations and multi-sector portfolio support.',
-    url: 'https://www.afrinext.net/',
-  },
-  {
-    name: 'Wowzi',
-    // logo: wowziLogo,
-    sector: 'Creator Economy',
-    text: 'A technology platform connecting global brands to a diverse community of African creators, unleashing the power of creator social marketing through pre-vetted, verified influencers across the continent. Partnered with GI-Africa on healthcare influencer strategy and a digital wallet commercialisation pilot.',
-    url: 'https://www.wowzi.co/',
-  },
-]
-
 const partnershipInterests = [
   'Manufacturers & Innovators',
   'Retail & Distribution',
@@ -68,7 +41,7 @@ const initialForm = {
 
 const Partner = () => {
   const [form, setForm] = useState(initialForm)
-  const [status, setStatus] = useState('idle') // idle | submitting | success | error
+  const [status, setStatus] = useState('idle') 
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -162,52 +135,7 @@ const Partner = () => {
         </div>
       </section>
 
-      {/* ── Track Record ── 
-      <section className="bg-[#FAFAFA] px-6 md:px-16 py-20 md:py-28">
-        <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
-          Track Record
-        </div>
-        <h2 className="font-serif text-[#111111] text-3xl md:text-4xl font-bold leading-[1.15] mb-16">
-          Beyond Beauty Businesses
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {trackRecord.map((item) => (
-            <div
-              key={item.name}
-              className="group relative flex flex-col bg-white p-8 md:p-10 border border-[#EAE6DF] rounded-lg transition-all duration-300 hover:border-[#C9963A]/50 hover:shadow-[0_16px_40px_-16px_rgba(11,42,74,0.16)] hover:-translate-y-1"
-            >
-              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#C9963A]/0 to-transparent group-hover:via-[#C9963A]/60 transition-all duration-300" />
-              <div className="h-12 w-28 mb-6 flex items-center justify-start">
-                <img
-                  src={item.logo}
-                  alt={`${item.name} logo`}
-                  className="max-h-12 max-w-28 object-contain"
-                />
-              </div>
-              <h3 className="font-serif text-[#111111] text-xl font-bold mb-1">
-                {item.name}
-              </h3>
-              <div className="text-[#C9963A] text-xs font-semibold tracking-[2px] uppercase mb-4">
-                {item.sector}
-              </div>
-              <p className="text-[#4A5568] text-sm leading-relaxed mb-6 flex-1">
-                {item.text}
-              </p>
-              <a
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#111111] text-xs font-semibold tracking-widest uppercase inline-flex items-center gap-2 hover:gap-4 hover:text-[#C9963A] transition-all duration-200 self-start"
-              >
-                Learn More →
-              </a>
-            </div>
-          ))}
-        </div>
-      </section>
-      */}
-
-      {/* ── Start a Partnership Conversation (single focused action) ── */}
+      {/* ── Start a Partnership Conversation ── */}
       <section className="relative overflow-hidden bg-[#0B2A4A] px-6 md:px-16 py-20 md:py-28">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.05]"

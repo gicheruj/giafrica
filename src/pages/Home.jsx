@@ -68,8 +68,6 @@ const partnerCategories = [
   'Investors & Strategic Partners',
 ]
 
-// Animates a stat value counting up from 0 to its target once it scrolls into view.
-// Understands prefixes/suffixes like "KSh " + "100" + "K", or "36" + "%".
 const StatCounter = ({ value, duration = 1500 }) => {
   const match = value.match(/^([^\d]*)([\d,]+)(.*)$/)
   const [display, setDisplay] = useState(match ? `${match[1]}0${match[3]}` : value)
@@ -94,7 +92,7 @@ const StatCounter = ({ value, duration = 1500 }) => {
 
           const step = (now) => {
             const progress = Math.min((now - startTime) / duration, 1)
-            const eased = 1 - Math.pow(1 - progress, 3) // ease-out cubic
+            const eased = 1 - Math.pow(1 - progress, 3) 
             const current = Math.round(eased * target)
             setDisplay(`${prefix}${formatNum(current)}${suffix}`)
             if (progress < 1) requestAnimationFrame(step)
@@ -112,8 +110,6 @@ const StatCounter = ({ value, duration = 1500 }) => {
   return <span ref={ref}>{display}</span>
 }
 
-// Small fixed set of gold flecks — positions/timings are hardcoded (not random)
-// so the animation is stable across renders instead of reshuffling every time.
 const goldParticles = [
   { top: '15%', left: '20%', size: 3, delay: '0s', duration: '4s' },
   { top: '30%', left: '72%', size: 2, delay: '1.2s', duration: '5s' },
@@ -153,7 +149,7 @@ const HeroCarousel = () => {
             className="w-full h-full object-contain"
           />
 
-          {/* Gold particles + light streak overlay */}
+          {/* Gold Particles */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             {goldParticles.map((p, idx) => (
               <span
@@ -221,7 +217,6 @@ const Home = () => {
         {/* Left */}
         <div className="flex flex-col justify-center px-6 md:px-16 py-20 md:py-24 relative z-10">
           <div className="flex items-center gap-3 mb-7">
-            {/* <div className="w-10 h-px bg-[#C9963A]" /> */}
             <span className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase">
               <span className="block mb-1">G-AFRICA BEAUTY</span>
               <span className="block">Building Africa's Next Generation of Beauty Business</span>
@@ -254,7 +249,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Right — Sliding image carousel: Transform / Innovate / Lead */}
+        {/* Right — Sliding image carousel */}
         <div className="flex items-center justify-center px-2 md:px-4 py-6 md:py-10 relative z-10">
           <div className="w-full">
             <HeroCarousel />
@@ -411,39 +406,6 @@ const Home = () => {
           </p>
         </div>
       </section>
-
-      {/* ── Growth Journey (teaser) ── 
-      <section className="bg-[#FAF6EF] px-6 md:px-16 py-20 md:py-28">
-        <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
-          Roadmap
-        </div>
-        <h2 className="font-serif text-[#111111] text-3xl md:text-4xl font-bold leading-[1.15] mb-14 max-w-2xl">
-          Commercial Launch Now. Owned Manufacturing Next.
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          {timeline.map((item) => (
-            <div
-              key={item.period}
-              className="bg-white border border-[#EAE6DF] rounded-lg p-6"
-            >
-              <div className="text-[#C9963A]/70 font-serif text-base font-bold mb-2 tracking-wide">
-                {item.period}
-              </div>
-              <h3 className="font-serif text-[#111111] text-lg font-bold">
-                {item.title}
-              </h3>
-            </div>
-          ))}
-        </div>
-        <Link
-          to="/info"
-          className="text-[#0B2A4A] text-xs font-semibold tracking-widest uppercase inline-flex items-center gap-2 hover:gap-4 hover:text-[#C9963A] transition-all duration-200"
-        >
-          See the Full Roadmap →
-        </Link>
-      </section>
-
-      */}
 
       {/* ── Partnership Invitation (CTA) ── */}
       <section className="relative overflow-hidden px-6 md:px-16 py-20 md:py-28 bg-[#FAF6EF] border-t border-[#EAE6DF]">

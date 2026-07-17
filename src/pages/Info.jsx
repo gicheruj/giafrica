@@ -46,7 +46,6 @@ const pillars = [
   },
 ]
 
-// Year-by-year roadmap for the gold line/dot graphic — one 2-word beat per year.
 const roadmapYears = [
   { year: 2022, desc: 'Ecosystem Founded' },
   { year: 2023, desc: 'Building Foundations' },
@@ -57,9 +56,8 @@ const roadmapYears = [
   { year: 2028, desc: 'Local Manufacturing' },
 ]
 
-const LINE_END_INDEX = 4 // index of 2026 — the gold line runs up to here
+const LINE_END_INDEX = 4 
 
-// Product photography — two shots each for Rembeka and Adorn.
 const productShots = [
   { tag: 'Rembeka Online', image: rembeka1 },
   { tag: 'Rembeka Online', image: rembeka2 },
@@ -67,15 +65,12 @@ const productShots = [
   { tag: 'Adorn Africa', image: adorn2 },
 ]
 
-// Expansion markets shown below the Africa map card.
 const expansionCountries = [
   { name: 'Kenya', status: 'Current Operations' },
   { name: 'Uganda', status: 'Coming Soon' },
   { name: 'Tanzania', status: 'Future Market' },
 ]
 
-// Animates a stat value counting up from 0 to its target once it scrolls into view.
-// Understands prefixes/suffixes like "KSh " + "100" + "K", or "36" + "%".
 const StatCounter = ({ value, duration = 1500 }) => {
   const match = value.match(/^([^\d]*)([\d,]+)(.*)$/)
   const [display, setDisplay] = useState(match ? `${match[1]}0${match[3]}` : value)
@@ -100,7 +95,7 @@ const StatCounter = ({ value, duration = 1500 }) => {
 
           const step = (now) => {
             const progress = Math.min((now - startTime) / duration, 1)
-            const eased = 1 - Math.pow(1 - progress, 3) // ease-out cubic
+            const eased = 1 - Math.pow(1 - progress, 3) 
             const current = Math.round(eased * target)
             setDisplay(`${prefix}${formatNum(current)}${suffix}`)
             if (progress < 1) requestAnimationFrame(step)
@@ -118,7 +113,7 @@ const StatCounter = ({ value, duration = 1500 }) => {
   return <span ref={ref}>{display}</span>
 }
 
-// Gold line running 2022 → 2026, with 2027 and 2028 shown as standalone dots.
+// Gold line running 2022 → 2026
 const YearRoadmap = () => {
   const lineLeftPct = (0.5 / roadmapYears.length) * 100
   const lineWidthPct = ((LINE_END_INDEX + 0.5) / roadmapYears.length) * 100 - lineLeftPct
@@ -206,68 +201,11 @@ const Info = () => {
         </div>
       </section>
 
-      {/* ── Roadmap (gold line, year by year) — sits right after the hero ── */}
       <section className="bg-[#FAF6EF] px-6 md:px-16 py-10 md:py-14 border-b border-[#EAE6DF]">
         <YearRoadmap />
       </section>
 
-      {/* ── The G-AFRICA Difference ── 
-      <section className="bg-[#FAFAFA] px-6 md:px-16 py-20 md:py-28 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20 items-start">
-        <div>
-          <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
-            The G-AFRICA Difference
-          </div>
-          <h2 className="font-serif text-[#111111] text-3xl md:text-4xl font-bold leading-[1.15]">
-            More Than Beauty Products. A Connected Ecosystem.
-          </h2>
-        </div>
-        <div className="md:col-span-2 space-y-6">
-          <p className="text-[#4A5568] text-base leading-[1.9]">
-            Africa's beauty economy needs more than great products. It needs
-            reliable market access, stronger supply chains, real consumer
-            insight and locally relevant innovation.
-          </p>
-          <div className="relative bg-[#0B2A4A] rounded-lg border-l-2 border-[#C9963A] p-8 md:p-10 overflow-hidden">
-            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#C9963A]/10 blur-3xl" />
-            <p className="relative text-white/80 text-base leading-[1.9]">
-              We build products, routes to market, supply-chain capability
-              and data-driven growth — not just cosmetics.
-            </p>
-          </div>
-        </div>
-      </section>
-      */}
-
-      {/* ── Vision & Mission ── 
-      <section className="px-6 md:px-16 py-20 md:py-28">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {[
-            {
-              title: 'Vision',
-              text: "Africa's leading commercialisation and beauty ecosystem development partner — building sustainable enterprises that create economic and social impact.",
-            },
-            {
-              title: 'Mission',
-              text: 'To transform ideas into commercially successful beauty businesses through strategic advisory, market intelligence, ecosystem development and execution excellence.',
-            },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="group bg-[#FAFAFA] border border-[#EAE6DF] border-t-4 border-t-[#C9963A] rounded-lg p-8 md:p-10 transition-all duration-300 hover:shadow-[0_16px_40px_-16px_rgba(11,42,74,0.16)] hover:-translate-y-1"
-            >
-              <h3 className="font-serif text-[#111111] text-2xl font-bold mb-4">
-                {item.title}
-              </h3>
-              <p className="text-[#4A5568] text-sm leading-relaxed">
-                {item.text}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-      */}
-
-      {/* ── Capability Pillars ── */}
+      {/* What We Do */}
       <section className="relative overflow-hidden bg-[#0B2A4A] px-6 md:px-16 py-20 md:py-28">
         <div className="flex items-center gap-3 mb-5">
           <div className="w-10 h-px bg-[#C9963A]" />
@@ -312,7 +250,7 @@ const Info = () => {
         </div>
       </section>
 
-      {/* ── Rembeka and Adorn: Product, Photographed ── */}
+      {/* Products */}
       <section className="bg-[#0B2A4A] px-6 md:px-16 py-20 md:py-28">
         <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
           Rembeka and Adorn
@@ -340,7 +278,7 @@ const Info = () => {
         </div>
       </section>
 
-      {/* ── Expansion: Where We Are. Where We Are Going. ── */}
+      {/* Expansion */}
       <section className="bg-white px-6 md:px-16 py-20 md:py-28">
         <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
           Expansion

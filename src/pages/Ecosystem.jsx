@@ -20,8 +20,6 @@ const adornStats = [
   { value: '2025', label: 'Year Launched' },
 ]
 
-// Single source of truth for each brand — the card shows the short version,
-// clicking it opens a modal with the full version (stats, longer text, CTA).
 const brands = [
   {
     num: '01',
@@ -274,27 +272,6 @@ const Ecosystem = () => {
           ))}
         </div>
       </section>
-
-      {/* ── Why Data Matters ── 
-      <section className="bg-[#0B2A4A] px-6 md:px-16 py-16 md:py-24 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20 items-start">
-        <div>
-          <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
-            Why Data Matters
-          </div>
-          <h2 className="font-serif text-white text-3xl md:text-4xl font-bold leading-[1.15]">
-            Data Should Determine What We Sell, Make and Scale Next.
-          </h2>
-        </div>
-        <div className="md:col-span-2">
-          <p className="text-white/70 text-base font-light leading-[1.9] border-l-2 border-[#C9963A] pl-6">
-            Marketplace activity, supplier participation and customer demand
-            across Rembeka, IVA and Adorn inform inventory decisions, product
-            development, channel strategy and commercial growth — so every
-            engine gets smarter as the ecosystem grows.
-          </p>
-        </div>
-      </section>
-      */}
 
       {/* ── CTA ── */}
       <section className="bg-white px-6 md:px-16 py-16 md:py-24 text-center">
