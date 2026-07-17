@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import transformImg from '../assets/Hero/transform.png'
 import innovateImg from '../assets/Hero/innovate.png'
@@ -62,6 +62,62 @@ const partnerCategories = [
   'Investors & Strategic Partners',
 ]
 
+// Animates a stat value counting up from 0 to its target once it scrolls into view.
+// Understands prefixes/suffixes like "KSh " + "100" + "K", or "36" + "%".
+const StatCounter = ({ value, duration = 1500 }) => {
+  const match = value.match(/^([^\d]*)([\d,]+)(.*)$/)
+  const [display, setDisplay] = useState(match ? `${match[1]}0${match[3]}` : value)
+  const ref = useRef(null)
+  const started = useRef(false)
+
+  useEffect(() => {
+    if (!match) return
+    const [, prefix, numStr, suffix] = match
+    const target = parseInt(numStr.replace(/,/g, ''), 10)
+    const hasComma = numStr.includes(',')
+    const formatNum = (n) => (hasComma ? n.toLocaleString() : String(n))
+
+    const node = ref.current
+    if (!node) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true
+          const startTime = performance.now()
+
+          const step = (now) => {
+            const progress = Math.min((now - startTime) / duration, 1)
+            const eased = 1 - Math.pow(1 - progress, 3) // ease-out cubic
+            const current = Math.round(eased * target)
+            setDisplay(`${prefix}${formatNum(current)}${suffix}`)
+            if (progress < 1) requestAnimationFrame(step)
+          }
+          requestAnimationFrame(step)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.4 }
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [value, duration])
+
+  return <span ref={ref}>{display}</span>
+}
+
+// Small fixed set of gold flecks — positions/timings are hardcoded (not random)
+// so the animation is stable across renders instead of reshuffling every time.
+const goldParticles = [
+  { top: '15%', left: '20%', size: 3, delay: '0s', duration: '4s' },
+  { top: '30%', left: '72%', size: 2, delay: '1.2s', duration: '5s' },
+  { top: '58%', left: '35%', size: 4, delay: '2.1s', duration: '4.5s' },
+  { top: '72%', left: '82%', size: 2, delay: '0.6s', duration: '6s' },
+  { top: '22%', left: '50%', size: 3, delay: '3s', duration: '5.5s' },
+  { top: '85%', left: '15%', size: 2, delay: '1.8s', duration: '4.2s' },
+  { top: '45%', left: '90%', size: 3, delay: '2.6s', duration: '4.8s' },
+]
+
 const HeroCarousel = () => {
   const [active, setActive] = useState(0)
 
@@ -90,6 +146,25 @@ const HeroCarousel = () => {
             alt={slide.tag}
             className="w-full h-full object-contain"
           />
+
+          {/* Gold particles + light streak overlay */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {goldParticles.map((p, idx) => (
+              <span
+                key={idx}
+                className="absolute rounded-full bg-[#C9963A]"
+                style={{
+                  top: p.top,
+                  left: p.left,
+                  width: `${p.size}px`,
+                  height: `${p.size}px`,
+                  boxShadow: '0 0 6px 1px rgba(201,150,58,0.6)',
+                  animation: `gold-particle-float ${p.duration} ease-in-out ${p.delay} infinite`,
+                }}
+              />
+            ))}
+            <div className="absolute inset-0 hero-light-streak" />
+          </div>
         </div>
       ))}
 
@@ -106,6 +181,17 @@ const HeroCarousel = () => {
           />
         ))}
       </div>
+
+      <style>{`
+        @keyframes gold-particle-float {
+          0%, 100% { transform: translateY(0) scale(1); opacity: 0.25; }
+          50% { transform: translateY(-8px) scale(1.4); opacity: 0.9; }
+        }
+        @keyframes hero-streak-sweep {
+          0%, 20% { transform: translateX(-150%); }
+          45%, 100% { transform: translateX(150%); }
+        }
+      `}</style>
     </div>
   )
 }
@@ -186,7 +272,7 @@ const Home = () => {
               }`}
             >
               <div className="font-serif text-[#0B2A4A] text-3xl md:text-4xl font-bold leading-none mb-2">
-                {stat.value}
+                <StatCounter value={stat.value} />
               </div>
               <div className="text-[#0B2A4A]/50 text-[10px] md:text-xs font-medium tracking-widest uppercase">
                 {stat.label}
@@ -227,7 +313,7 @@ const Home = () => {
           </div>
           <h2 className="font-serif text-[#111111] text-4xl md:text-5xl font-bold leading-[1.15]">
             One Ecosystem.{' '}
-            <em className="text-[#C9963A] not-italic">Three Engines.</em>
+            <em className="text-[#C9963A] not-italic">Three Brands.</em>
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#EAE6DF] rounded-lg overflow-hidden border border-[#EAE6DF] mb-10">
@@ -262,7 +348,7 @@ const Home = () => {
           How It Fits Together
         </div>
         <h2 className="font-serif text-[#111111] text-3xl md:text-4xl font-bold leading-[1.15] mb-14 max-w-2xl">
-          One Ecosystem. Three Engines. Stronger Growth.
+          One Ecosystem. Three Brands. Stronger Growth.
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {flow.map((step, i) => (
@@ -307,7 +393,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── Growth Journey (teaser) ── */}
+      {/* ── Growth Journey (teaser) ── 
       <section className="bg-[#FAF6EF] px-6 md:px-16 py-20 md:py-28">
         <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
           Roadmap
@@ -337,6 +423,8 @@ const Home = () => {
           See the Full Roadmap →
         </Link>
       </section>
+
+      */}
 
       {/* ── Partnership Invitation (CTA) ── */}
       <section className="relative overflow-hidden px-6 md:px-16 py-20 md:py-28 bg-[#FAF6EF] border-t border-[#EAE6DF]">

@@ -1,28 +1,8 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Adorn from '../assets/Ecosystem/Adorn.png'
 import Rembeka from '../assets/Ecosystem/Rembeka.jpg'
 import IVA from '../assets/Ecosystem/IVA.jpg'
-
-const engines = [
-  {
-    num: '01',
-    name: 'Rembeka Online',
-    role: 'Data & Last-Mile Distribution',
-    text: 'Technology, marketplace data and last-mile delivery — connecting consumers with curated African beauty products and professional stylists.',
-  },
-  {
-    num: '02',
-    name: 'IVA Cosmetics',
-    role: 'Commercial & Retail Distribution',
-    text: 'The commercial engine — retail, reselling and distribution reach that carries products from marketplace to shelf.',
-  },
-  {
-    num: '03',
-    name: 'Adorn Africa',
-    role: 'Proprietary Brand & Innovation',
-    text: 'GI-Africa\'s own cosmetics line — proprietary products built and validated in-market, starting with cosmetics and expanding toward skincare.',
-  },
-]
 
 const rembekaStats = [
   { value: '2,000+', label: 'Orders Fulfilled' },
@@ -40,6 +20,50 @@ const adornStats = [
   { value: '2025', label: 'Year Launched' },
 ]
 
+// Single source of truth for each brand — the card shows the short version,
+// clicking it opens a modal with the full version (stats, longer text, CTA).
+const brands = [
+  {
+    num: '01',
+    name: 'Rembeka Online',
+    role: 'Data & Last-Mile Distribution',
+    est: 'Est. 2022',
+    image: Rembeka,
+    shortText:
+      'Technology, marketplace data and last-mile delivery — connecting consumers with curated African beauty products and professional stylists.',
+    fullText:
+      "Kenya's beauty marketplace, connecting consumers with curated African beauty products and professional stylists. Rembeka is the ecosystem's data and last-mile distribution engine — every order and stylist booking sharpens what the rest of G-AFRICA builds and sells next.",
+    stats: rembekaStats,
+    cta: { label: 'Shop on Rembeka', href: 'https://rembekaonline.com' },
+  },
+  {
+    num: '02',
+    name: 'IVA Cosmetics',
+    role: 'Commercial & Retail Distribution',
+    est: null,
+    image: IVA,
+    shortText:
+      'The commercial engine — retail, reselling and distribution reach that carries products from marketplace to shelf.',
+    fullText:
+      "The ecosystem's commercial and retail distribution engine — carrying products from marketplace validation into wider retail and reselling reach across Kenya.",
+    stats: ivaStats,
+    cta: null,
+  },
+  {
+    num: '03',
+    name: 'Adorn Africa',
+    role: 'Proprietary Brand & Innovation',
+    est: 'Est. 2025',
+    image: Adorn,
+    shortText:
+      "GI-Africa's own cosmetics line — proprietary products built and validated in-market, starting with cosmetics and expanding toward skincare.",
+    fullText:
+      "A premium African cosmetics brand celebrating the beauty of the African woman — bold, intentional and made to last. The ecosystem's proprietary product and innovation engine, launched with a 300-unit eyeshadow pilot and co-invested with Kami Consult Limited.",
+    stats: adornStats,
+    cta: { label: 'See More', href: 'https://www.instagram.com/adorn.africa/' },
+  },
+]
+
 const flow = [
   { title: 'Rembeka', text: 'Data & demand signals' },
   { title: 'IVA', text: 'Commercial reach & distribution' },
@@ -47,7 +71,145 @@ const flow = [
   { title: 'Outcome', text: 'Stronger customer insight & better decisions' },
 ]
 
+const BrandCard = ({ brand, onSelect }) => (
+  <button
+    type="button"
+    onClick={() => onSelect(brand)}
+    className="group relative text-left rounded-2xl overflow-hidden border border-[#EAE6DF] bg-white hover:-translate-y-1 hover:shadow-xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9963A]"
+  >
+    <div className="relative h-80 md:h-96 lg:h-[26rem] overflow-hidden">
+      <img
+        src={brand.image}
+        alt={brand.name}
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A4A]/85 via-[#0B2A4A]/10 to-transparent" />
+      <span className="absolute top-4 left-4 text-white/80 text-xs font-semibold tracking-[3px]">
+        {brand.num}
+      </span>
+      {brand.est && (
+        <span className="absolute top-4 right-4 text-[10px] text-white/80 tracking-widest uppercase border border-white/30 rounded-sm px-2 py-1">
+          {brand.est}
+        </span>
+      )}
+      <div className="absolute bottom-4 left-5 right-5">
+        <h3 className="font-serif text-white text-xl font-bold leading-tight">
+          {brand.name}
+        </h3>
+      </div>
+    </div>
+
+    <div className="px-6 py-4 md:px-7 md:py-5 flex items-center justify-between gap-4">
+      <span className="text-[#C9963A] text-[11px] font-semibold tracking-[2px] uppercase whitespace-nowrap overflow-hidden text-ellipsis">
+        {brand.role}
+      </span>
+      <span className="shrink-0 text-[#0B2A4A] text-xs font-semibold tracking-widest uppercase inline-flex items-center gap-2 transition-all duration-200 group-hover:gap-4 group-hover:text-[#C9963A]">
+        View Details →
+      </span>
+    </div>
+  </button>
+)
+
+const BrandModal = ({ brand, onClose }) => {
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [onClose])
+
+  if (!brand) return null
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${brand.name} details`}
+    >
+      <div
+        className="absolute inset-0 bg-[#0B2A4A]/70 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      <div className="relative bg-white rounded-2xl overflow-hidden w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl">
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close details"
+          className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white/90 text-[#0B2A4A] flex items-center justify-center hover:bg-[#C9963A] hover:text-white transition-colors duration-200"
+        >
+          ✕
+        </button>
+
+        <div className="relative h-56 md:h-72">
+          <img
+            src={brand.image}
+            alt={brand.name}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A4A]/90 via-[#0B2A4A]/25 to-transparent" />
+          <div className="absolute bottom-0 left-0 p-6 md:p-8">
+            <span className="block text-[#C9963A] text-xs font-semibold tracking-[2px] mb-2">
+              {brand.num}
+              {brand.est ? ` · ${brand.est}` : ''}
+            </span>
+            <h2 className="font-serif text-white text-3xl md:text-4xl font-bold">
+              {brand.name}
+            </h2>
+          </div>
+        </div>
+
+        <div className="p-6 md:p-10">
+          <div className="text-[#C9963A] text-xs font-semibold tracking-[2px] uppercase mb-4">
+            {brand.role}
+          </div>
+          <p className="text-[#4A5568] text-base leading-[1.9] mb-8">
+            {brand.fullText}
+          </p>
+
+          {brand.stats.length > 0 && (
+            <div
+              className={`grid gap-0.5 mb-8 ${
+                brand.stats.length === 1 ? 'grid-cols-1 max-w-xs' : 'grid-cols-3'
+              }`}
+            >
+              {brand.stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="bg-[#FAFAFA] border border-[#EAE6DF] p-5 text-center"
+                >
+                  <div className="font-serif text-[#C9963A] text-2xl md:text-3xl font-bold leading-none mb-1">
+                    {stat.value}
+                  </div>
+                  <div className="text-[#4A5568] text-[10px] font-medium tracking-widest uppercase">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {brand.cta && (
+            <a
+              href={brand.cta.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#0B2A4A] text-white text-xs font-bold tracking-widest uppercase px-9 py-4 rounded-sm hover:bg-[#C9963A] hover:text-[#0B2A4A] transition-colors duration-200 inline-block"
+            >
+              {brand.cta.label}
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const Ecosystem = () => {
+  const [selectedBrand, setSelectedBrand] = useState(null)
+
   return (
     <div className="bg-white">
 
@@ -60,8 +222,8 @@ const Ecosystem = () => {
           </span>
         </div>
         <h1 className="font-serif text-white text-5xl md:text-7xl font-bold leading-[1.05] max-w-3xl">
-          One Ecosystem.{' '}
-          <em className="text-[#C9963A] not-italic">Three Engines.</em>
+          Three Brands.{' '}
+          <em className="text-[#C9963A] not-italic">One Vision for African Beauty.</em>
         </h1>
         <p className="text-white/70 text-base font-light leading-[1.9] max-w-xl mt-8 border-l-2 border-[#C9963A] pl-6">
           Rembeka Online, IVA Cosmetics and Adorn Africa aren't separate
@@ -70,168 +232,19 @@ const Ecosystem = () => {
         </p>
       </section>
 
-      {/* ── Engine Overview Grid ── */}
-      <section className="px-6 md:px-16 py-16 md:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#EAE6DF] rounded-lg overflow-hidden border border-[#EAE6DF]">
-          {engines.map((engine) => (
-            <div
-              key={engine.num}
-              className="group bg-white p-8 md:p-10 transition-colors duration-300 hover:bg-[#0B2A4A]"
-            >
-              <span className="block text-[#C9963A]/50 text-xs font-semibold tracking-[2px] mb-6 transition-colors duration-300 group-hover:text-[#C9963A]">
-                {engine.num}
-              </span>
-              <h3 className="font-serif text-[#111111] text-xl font-bold mb-2 transition-colors duration-300 group-hover:text-white">
-                {engine.name}
-              </h3>
-              <div className="text-[#C9963A] text-[11px] font-semibold tracking-[2px] uppercase mb-4">
-                {engine.role}
-              </div>
-              <p className="text-[#4A5568] text-sm leading-relaxed transition-colors duration-300 group-hover:text-white/60">
-                {engine.text}
-              </p>
-            </div>
+      {/* ── Brand Cards ── */}
+      <section className="bg-[#FAF6EF] px-6 md:px-16 py-16 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {brands.map((brand) => (
+            <BrandCard key={brand.num} brand={brand} onSelect={setSelectedBrand} />
           ))}
         </div>
+        <p className="text-[#4A5568]/70 text-xs tracking-wide mt-6 text-center md:text-left">
+          Tap a card to see the full details for that brand.
+        </p>
       </section>
 
-      {/* ── Rembeka Online ── */}
-      <section className="px-6 md:px-16 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
-        <div>
-          <div className="border border-[#C9963A]/40 text-[#C9963A] text-xs font-semibold tracking-[2px] uppercase px-3 py-1.5 inline-block mb-6">
-            Engine 01 · Est. 2022
-          </div>
-          <h2 className="font-serif text-[#111111] text-4xl md:text-5xl font-bold leading-[1.1] mb-6">
-            Rembeka Online
-          </h2>
-          <p className="text-[#4A5568] text-base leading-[1.9] mb-8">
-            Kenya's beauty marketplace, connecting consumers with curated
-            African beauty products and professional stylists. Rembeka is
-            the ecosystem's data and last-mile distribution engine — every
-            order and stylist booking sharpens what the rest of G-AFRICA
-            builds and sells next.
-          </p>
-          <div className="grid grid-cols-3 gap-0.5 mb-8">
-            {rembekaStats.map((stat) => (
-              <div
-                key={stat.label}
-                className="bg-[#FAFAFA] border border-[#EAE6DF] p-5 text-center"
-              >
-                <div className="font-serif text-[#C9963A] text-2xl md:text-3xl font-bold leading-none mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-[#4A5568] text-[10px] font-medium tracking-widest uppercase">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-          <a
-            href="https://rembekaonline.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#0B2A4A] text-white text-xs font-bold tracking-widest uppercase px-9 py-4 rounded-sm hover:bg-[#C9963A] hover:text-[#0B2A4A] transition-colors duration-200 inline-block"
-          >
-            Shop on Rembeka
-          </a>
-        </div>
-
-        <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-[#EAE6DF] bg-[#FAFAFA] order-first md:order-last">
-          <img
-            src={Rembeka}
-            alt="Rembeka Online"
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </section>
-
-      {/* ── IVA Cosmetics ── */}
-      <section className="bg-[#0B2A4A] px-6 md:px-16 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
-        <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-[#C9963A]/20 bg-[#C9963A]/5 flex items-center justify-center">
-          <span className="font-serif text-[#C9963A]/40 text-2xl font-bold tracking-wide">
-            IVA Cosmetics
-          </span>
-        </div>
-
-        <div>
-          <div className="border border-[#C9963A]/40 text-[#C9963A] text-xs font-semibold tracking-[2px] uppercase px-3 py-1.5 inline-block mb-6">
-            Engine 02
-          </div>
-          <h2 className="font-serif text-white text-4xl md:text-5xl font-bold leading-[1.1] mb-6">
-            IVA Cosmetics
-          </h2>
-          <p className="text-white/70 text-base leading-[1.9] mb-8">
-            The ecosystem's commercial and retail distribution engine —
-            carrying products from marketplace validation into wider retail
-            and reselling reach across Kenya.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-0.5 mb-2 max-w-xs">
-            {ivaStats.map((stat) => (
-              <div
-                key={stat.label}
-                className="bg-white/5 border border-[#C9963A]/20 p-5 text-center"
-              >
-                <div className="font-serif text-[#C9963A] text-2xl md:text-3xl font-bold leading-none mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-white/60 text-[10px] font-medium tracking-widest uppercase">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Adorn Africa ── */}
-      <section className="px-6 md:px-16 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
-        <div>
-          <div className="border border-[#C9963A]/40 text-[#C9963A] text-xs font-semibold tracking-[2px] uppercase px-3 py-1.5 inline-block mb-6">
-            Engine 03 · Est. 2025
-          </div>
-          <h2 className="font-serif text-[#111111] text-4xl md:text-5xl font-bold leading-[1.1] mb-6">
-            Adorn Africa
-          </h2>
-          <p className="text-[#4A5568] text-base leading-[1.9] mb-8">
-            A premium African cosmetics brand celebrating the beauty of the
-            African woman — bold, intentional and made to last. The
-            ecosystem's proprietary product and innovation engine, launched
-            with a 300-unit eyeshadow pilot and co-invested with Kami
-            Consult Limited.
-          </p>
-          <div className="grid grid-cols-3 gap-0.5 mb-8">
-            {adornStats.map((stat) => (
-              <div
-                key={stat.label}
-                className="bg-[#FAFAFA] border border-[#EAE6DF] p-5 text-center"
-              >
-                <div className="font-serif text-[#C9963A] text-2xl md:text-3xl font-bold leading-none mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-[#4A5568] text-[10px] font-medium tracking-widest uppercase">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-          <a
-            href="https://www.instagram.com/adorn.africa/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#0B2A4A] text-white text-xs font-bold tracking-widest uppercase px-9 py-4 rounded-sm hover:bg-[#C9963A] hover:text-[#0B2A4A] transition-colors duration-200 inline-block"
-          >
-            See More
-          </a>
-        </div>
-
-        <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-[#C9963A]/20 bg-[#C9963A]/5 order-first md:order-last">
-          <img
-            src={Adorn}
-            alt="Adorn Africa"
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </section>
+      <BrandModal brand={selectedBrand} onClose={() => setSelectedBrand(null)} />
 
       {/* ── How the Model Works ── */}
       <section className="bg-[#FAFAFA] px-6 md:px-16 py-16 md:py-24">
@@ -239,7 +252,7 @@ const Ecosystem = () => {
           How It Fits Together
         </div>
         <h2 className="font-serif text-[#111111] text-3xl md:text-4xl font-bold leading-[1.15] mb-14 max-w-2xl">
-          One Ecosystem. Three Engines. Stronger Growth.
+          One Ecosystem. Three Brands. Stronger Growth.
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {flow.map((step, i) => (
@@ -265,7 +278,7 @@ const Ecosystem = () => {
         </div>
       </section>
 
-      {/* ── Why Data Matters ── */}
+      {/* ── Why Data Matters ── 
       <section className="bg-[#0B2A4A] px-6 md:px-16 py-16 md:py-24 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20 items-start">
         <div>
           <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
@@ -284,6 +297,7 @@ const Ecosystem = () => {
           </p>
         </div>
       </section>
+      */}
 
       {/* ── CTA ── */}
       <section className="bg-white px-6 md:px-16 py-16 md:py-24 text-center">
