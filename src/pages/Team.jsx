@@ -5,36 +5,31 @@ const team = [
     initials: 'MW',
     name: 'Dr. Millicent Wanjeri Loice',
     role: 'Founder & CEO',
-    bio: 'A medical doctor turned tech entrepreneur, Dr. Millicent brings over eight years of strategic and business development experience to G-AFRICA. Her background at the intersection of healthcare, technology and commerce drives the company\'s human-centred approach to building Africa\'s beauty economy.',
-    linkedin: '#',
+    bio: 'Dr. Millicent brings over eight years of strategic and business development experience to G-AFRICA. Her background at the intersection of healthcare, technology and commerce drives the company\'s human-centred approach to building Africa\'s beauty economy.',
   },
   {
     initials: 'EN',
     name: 'Enid Njuguna',
     role: 'Chief Operating Officer',
     bio: 'Oversees day-to-day operations, driving execution and operational excellence across all three engines of the ecosystem.',
-    linkedin: '#',
   },
   {
     initials: 'JG',
     name: 'John Maina Gicheru',
     role: 'Tech Lead',
     bio: 'Leads technology strategy and platform development across the G-AFRICA ecosystem.',
-    linkedin: '#',
   },
   {
     initials: 'AO',
     name: 'Angela Omurunga',
     role: 'Tech Product Owner',
     bio: 'Owns product direction for G-AFRICA\'s technology platforms, translating strategy into shipped features.',
-    linkedin: '#',
   },
   {
     initials: 'IN',
     name: 'Ian Njue',
     role: 'Brand & Marketing Lead',
     bio: 'Leads brand strategy and marketing across Rembeka, IVA and Adorn.',
-    linkedin: '#',
   },
 ]
 
@@ -80,7 +75,7 @@ const Team = () => {
               className="group relative overflow-hidden rounded-2xl border border-[#EAE6DF] bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
               {/* Portrait area — ivory, with initials monogram and hover bio */}
-              <div className="relative aspect-[3/4] bg-[#FAF6EF] overflow-hidden">
+              <div className="relative aspect-[3/4] bg-[#0B2A4A] overflow-hidden">
                 <div
                   className="absolute inset-0 opacity-[0.06]"
                   style={{
@@ -91,7 +86,7 @@ const Team = () => {
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-28 h-28 rounded-full border border-[#C9963A]/30 flex items-center justify-center">
-                    <span className="font-serif text-[#0B2A4A] text-3xl font-bold tracking-wide">
+                    <span className="font-serif text-[#C9963A] text-3xl font-bold tracking-wide">
                       {person.initials}
                     </span>
                   </div>
@@ -115,16 +110,6 @@ const Team = () => {
                     {person.role}
                   </div>
                 </div>
-
-                <a
-                  href={person.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${person.name} on LinkedIn`}
-                  className="shrink-0 w-9 h-9 rounded-full border border-[#0B2A4A]/20 text-[#0B2A4A] flex items-center justify-center transition-colors duration-200 hover:bg-[#0B2A4A] hover:text-white hover:border-[#0B2A4A]"
-                >
-                  <LinkedInIcon />
-                </a>
               </div>
             </div>
           ))}
