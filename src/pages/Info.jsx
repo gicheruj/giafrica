@@ -305,30 +305,21 @@ const Info = () => {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="relative overflow-hidden bg-white px-6 md:px-16 py-20 md:py-28 text-center border-t border-[#EAE6DF]">
+      {/* ── CTA — Meet the Team ── */}
+      <section className="relative overflow-hidden bg-[#FAF6EF] px-6 md:px-16 py-20 md:py-28 text-center border-t border-[#EAE6DF]">
         <div className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 h-px w-24 bg-[#C9963A]" />
-        <h2 className="font-serif text-[#111111] text-4xl md:text-5xl font-bold mb-5">
-          Want to Know{' '}
-          <em className="text-[#C9963A] not-italic">More?</em>
+        <h2 className="font-serif text-[#111111] text-4xl md:text-5xl font-bold mb-10 max-w-2xl mx-auto leading-[1.2]">
+          A Full-Time Team Across{' '}
+          <em className="text-[#C9963A] not-italic">
+            Leadership, Operations, Technology and Marketing.
+          </em>
         </h2>
-        <p className="text-[#4A5568] text-base max-w-lg mx-auto mb-10">
-          Explore our ecosystem or get in touch to discuss partnership opportunities.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link
-            to="/ecosystem"
-            className="bg-[#0B2A4A] text-white text-xs font-bold tracking-widest uppercase px-9 py-4 rounded-sm hover:bg-[#C9963A] hover:text-[#0B2A4A] transition-colors duration-200 w-full sm:w-auto text-center"
-          >
-            Our Ecosystem
-          </Link>
-          <Link
-            to="/partner"
-            className="border border-[#0B2A4A] text-[#0B2A4A] text-xs font-bold tracking-widest uppercase px-9 py-4 rounded-sm hover:bg-[#0B2A4A] hover:text-white transition-colors duration-200 w-full sm:w-auto text-center"
-          >
-            Partner With Us
-          </Link>
-        </div>
+        <Link
+          to="/team"
+          className="bg-[#0B2A4A] text-white text-xs font-bold tracking-widest uppercase px-9 py-4 rounded-sm hover:bg-[#C9963A] hover:text-[#0B2A4A] transition-colors duration-200 inline-block"
+        >
+          Meet the Team
+        </Link>
       </section>
 
     </div>
