@@ -11,6 +11,13 @@ const stats = [
   { value: 'KSh 100K', label: 'IVA Revenue Since March 2026' },
 ]
 
+const executionStats = [
+  { value: '2022', label: 'Operating in Kenya Since' },
+  { value: '3', label: 'Integrated Beauty Engines' },
+  { value: '36%', label: 'Founder Shareholding in Rembeka' },
+  { value: '2028+', label: 'Local Manufacturing Horizon' },
+]
+
 const engines = [
   {
     num: '01',
@@ -33,8 +40,8 @@ const engines = [
 ]
 
 const flow = [
-  { title: 'Rembeka', text: 'Data & demand signals' },
-  { title: 'IVA', text: 'Commercial reach & distribution' },
+  { title: 'Listen', text: 'Rembeka captures demand and marketplace signals' },
+  { title: 'Reach', text: 'IVA builds commercial access and distribution' },
   { title: 'Adorn', text: 'Proprietary product growth' },
   { title: 'Outcome', text: 'Stronger insight & better decisions' },
 ]
@@ -141,22 +148,99 @@ const Home = () => {
       </section> */}
 
       {/* ── The G-Africa Difference ── */}
-      <section className="px-6 md:px-16 py-20 md:py-28 bg-[#FAF6EF] grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20 items-start">
-        <div>
-          <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
-            The G-Africa Difference
+      <section className="px-6 md:px-16 py-20 md:py-28 bg-[#FAF6EF]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20 items-start mb-12">
+          <div>
+            <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
+              The G-Africa Difference
+            </div>
+            <h2 className="font-serif text-[#111111] text-3xl md:text-4xl font-bold leading-[1.15]">
+              More Than Beauty Products. A Connected Beauty Ecosystem.
+            </h2>
           </div>
-          <h2 className="font-serif text-[#111111] text-3xl md:text-4xl font-bold leading-[1.15]">
-            More Than Beauty Products. A Connected Ecosystem.
-          </h2>
+          <div className="md:col-span-2">
+            <p className="text-[#4A5568] text-base leading-[1.9] max-w-2xl">
+              Africa's beauty economy needs reliable market access, stronger
+              supply chains, real consumer insight and locally relevant
+              innovation.
+            </p>
+          </div>
         </div>
-        <div className="md:col-span-2 space-y-6">
-          <p className="text-[#4A5568] text-base leading-[1.9] max-w-2xl">
-            Africa's beauty economy needs more than great products. It needs
-            reliable market access, stronger supply chains, real consumer
-            insight and locally relevant innovation — which is exactly what
-            our three connected engines are built to deliver.
-          </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="bg-white border border-[#EAE6DF] border-t-4 border-t-[#C9963A] rounded-lg p-8 md:p-10 transition-all duration-300 hover:shadow-[0_16px_40px_-16px_rgba(11,42,74,0.16)] hover:-translate-y-1">
+            <h3 className="font-serif text-[#111111] text-xl md:text-2xl font-bold mb-3">
+              Insight Becomes Opportunity.
+            </h3>
+            <p className="text-[#4A5568] text-sm leading-relaxed">
+              Marketplace activity, supplier participation and customer
+              demand sharpen decisions about inventory, product development
+              and channel strategy.
+            </p>
+          </div>
+          <div className="bg-[#0B2A4A] border-t-4 border-t-[#C9963A] rounded-lg p-8 md:p-10 transition-all duration-300 hover:shadow-[0_16px_40px_-16px_rgba(11,42,74,0.35)] hover:-translate-y-1">
+            <h3 className="font-serif text-white text-xl md:text-2xl font-bold mb-3">
+              Opportunity Becomes Scale.
+            </h3>
+            <p className="text-white/70 text-sm leading-relaxed">
+              Our connected engines turn promising ideas into commercially
+              viable products with routes to market, distribution capability
+              and proprietary value.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── The Opportunity ── */}
+      <section className="px-6 md:px-16 py-20 md:py-28 bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+          <div>
+            <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
+              The Opportunity
+            </div>
+            <div className="font-serif text-[#C9963A] text-6xl md:text-7xl font-bold leading-none mb-5">
+              US$10.84B
+            </div>
+            <p className="text-[#4A5568] text-sm leading-relaxed max-w-xs mb-3">
+              Projected incremental growth in Africa's personal-care market,
+              2025–2030, at 9.6% CAGR.
+            </p>
+            {/* Source text from the reference screenshot was too blurry to
+                read with confidence — verify and correct before shipping. */}
+            <p className="text-[#4A5568]/50 text-xs">
+              Source: Technavio, 2028
+            </p>
+          </div>
+
+          <div>
+            <h2 className="font-serif text-[#111111] text-3xl md:text-4xl font-bold leading-[1.2] mb-5">
+              An Economy on the Move Needs an Ecosystem Built to Deliver.
+            </h2>
+            <p className="text-[#4A5568] text-base leading-[1.9] mb-10">
+              Traditional routes fragment access to consumers, capital,
+              supply and insight. G-Africa connects the routes.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-[#EAE6DF] rounded-lg overflow-hidden border border-[#EAE6DF]">
+              <div className="bg-[#FAFAFA] p-6">
+                <div className="text-[#0B2A4A]/50 text-[10px] font-semibold tracking-[2px] uppercase mb-3">
+                  The Old Model
+                </div>
+                <p className="text-[#4A5568] text-sm leading-relaxed">
+                  Standalone products. Fragmented distribution. Little
+                  consumer feedback.
+                </p>
+              </div>
+              <div className="bg-[#0B2A4A] p-6">
+                <div className="text-[#C9963A] text-[10px] font-semibold tracking-[2px] uppercase mb-3">
+                  The Connected Model
+                </div>
+                <p className="text-white/70 text-sm leading-relaxed">
+                  Brand + commerce + service network + data signals +
+                  partnerships.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -213,13 +297,39 @@ const Home = () => {
         </Link>
       </section>
 
+
+      {/* Evidence of Execution */}
+      <section className="px-6 md:px-16 py-20 md:py-28 bg-[#EAF2FA] border-y border-[#EAE6DF]">
+        <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
+          Evidence of Execution
+        </div>
+        <h2 className="font-serif text-[#0B2A4A] text-3xl md:text-4xl font-bold leading-[1.15] mb-14 max-w-2xl">
+          Commercial Ambition, Grounded in Action.
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {executionStats.map((stat) => (
+            <div
+              key={stat.label}
+              className="group bg-white rounded-lg p-7 text-center border border-[#A9C6E8]/40 transition-all duration-300 hover:-translate-y-1 hover:border-[#A9C6E8]"
+            >
+              <div className="font-serif text-[#0B2A4A] text-3xl md:text-4xl font-bold leading-none mb-2">
+                {stat.value}
+              </div>
+              <div className="text-[#0B2A4A]/50 text-[10px] md:text-xs font-medium tracking-widest uppercase">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── How the Model Works ── */}
       <section className="px-6 md:px-16 py-20 md:py-28 bg-[#FAF6EF]">
         <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
           How the Model Works
         </div>
         <h2 className="font-serif text-[#111111] text-3xl md:text-4xl font-bold leading-[1.15] mb-14 max-w-2xl">
-          One Ecosystem. Three Engines. Stronger Growth.
+          Data Should Determine What We Sell, Make and Scale Next.
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {flow.map((step, i) => (
@@ -245,7 +355,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── Why Data Matters ── */}
+      {/* ── Why Data Matters ── 
       <section className="bg-[#0B2A4A] px-6 md:px-16 py-20 md:py-28 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20 items-start">
         <div>
           <div className="text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
@@ -263,6 +373,7 @@ const Home = () => {
           </p>
         </div>
       </section>
+      */}
 
       {/* ── Growth Journey (teaser) ── */}
       {/* <section className="bg-[#FAF6EF] px-6 md:px-16 py-20 md:py-28">
