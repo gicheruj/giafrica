@@ -1,8 +1,12 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import lead from '../assets/Hero/lead.png'
 import Rembeka from '../assets/Ecosystem/Rembeka.jpg'
 import IVA from '../assets/Ecosystem/IVA.jpg'
 import Adorn from '../assets/Ecosystem/Adorn.png'
+import discoverySlide from '../assets/Hero/innovate.png'
+import insightSlide from '../assets/Hero/lead.png'
+import scaleSlide from '../assets/Hero/transform.png'
 
 const stats = [
   { value: '2022', label: 'Operating in Kenya Since' },
@@ -42,8 +46,8 @@ const engines = [
 const flow = [
   { title: 'Listen', text: 'Rembeka captures demand and marketplace signals' },
   { title: 'Reach', text: 'IVA builds commercial access and distribution' },
-  { title: 'Adorn', text: 'Proprietary product growth' },
-  { title: 'Outcome', text: 'Stronger insight & better decisions' },
+  { title: 'Create', text: 'Adorn turns insight into proprietary product growth' },
+  { title: 'Learn', text: 'Customer response improves every decision that follows' },
 ]
 
 const timeline = [
@@ -59,6 +63,112 @@ const partnerCategories = [
   'Technology & Data',
   'Investors & Strategic Partners',
 ]
+
+// Full-width story slideshow — text overlaid on photo, with prev/next controls.
+const storySlides = [
+  {
+    tag: 'Commerce + Community',
+    title: 'Discovery becomes trusted access.',
+    text: 'A connected network makes products, services and professionals easier to find.',
+    image: discoverySlide,
+  },
+  {
+    tag: 'Data + Insight',
+    title: 'Every order sharpens the next decision.',
+    text: 'Marketplace signals turn everyday transactions into a clearer picture of demand.',
+    image: insightSlide,
+  },
+  {
+    tag: 'Innovation + Scale',
+    title: 'Ideas become proprietary products.',
+    text: 'Validated insight moves from concept to shelf, built for African skin, hair and budgets.',
+    image: scaleSlide,
+  },
+]
+
+const StorySlideshow = () => {
+  const [active, setActive] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActive((prev) => (prev + 1) % storySlides.length)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const goPrev = () =>
+    setActive((prev) => (prev - 1 + storySlides.length) % storySlides.length)
+  const goNext = () => setActive((prev) => (prev + 1) % storySlides.length)
+
+  return (
+    <section className="relative w-full h-[420px] sm:h-[500px] md:h-[600px] lg:h-[680px] overflow-hidden bg-[#0B2A4A]">
+      {storySlides.map((slide, i) => (
+        <div
+          key={slide.tag}
+          className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+            i === active ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <img
+            src={slide.image}
+            alt={slide.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B2A4A]/90 via-[#0B2A4A]/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A4A]/70 via-transparent to-transparent" />
+
+          <div className="absolute inset-0 flex items-center">
+            <div className="px-6 md:px-16 max-w-xl">
+              <span className="block text-[#C9963A] text-xs font-semibold tracking-[3px] uppercase mb-4">
+                {slide.tag}
+              </span>
+              <h2 className="font-serif text-white text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.15] mb-4">
+                {slide.title}
+              </h2>
+              <p className="text-white/70 text-sm md:text-base leading-relaxed max-w-md">
+                {slide.text}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* Prev / Next controls */}
+      <div className="absolute bottom-6 right-6 md:bottom-10 md:right-16 flex items-center gap-3 z-10">
+        <button
+          type="button"
+          onClick={goPrev}
+          aria-label="Previous slide"
+          className="w-11 h-11 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-white flex items-center justify-center hover:bg-[#C9963A] hover:border-[#C9963A] hover:text-[#0B2A4A] transition-colors duration-200"
+        >
+          ←
+        </button>
+        <button
+          type="button"
+          onClick={goNext}
+          aria-label="Next slide"
+          className="w-11 h-11 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-white flex items-center justify-center hover:bg-[#C9963A] hover:border-[#C9963A] hover:text-[#0B2A4A] transition-colors duration-200"
+        >
+          →
+        </button>
+      </div>
+
+      {/* Dot navigation */}
+      <div className="absolute bottom-8 left-6 md:left-16 flex gap-2 z-10">
+        {storySlides.map((slide, i) => (
+          <button
+            key={slide.tag}
+            onClick={() => setActive(i)}
+            aria-label={`Show slide ${i + 1}`}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              i === active ? 'w-6 bg-[#C9963A]' : 'w-1.5 bg-white/40 hover:bg-white/70'
+            }`}
+          />
+        ))}
+      </div>
+    </section>
+  )
+}
 
 const Home = () => {
   return (
@@ -243,6 +353,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* ── Story Slideshow — full-bleed, text over photo ── */}
+      <StorySlideshow />
 
       {/* ── Our Ecosystem (teaser) ── */}
       <section className="bg-[#FAF6EF] px-6 md:px-16 py-20 md:py-28">
