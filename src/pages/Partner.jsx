@@ -115,7 +115,7 @@ const Partner = () => {
           </p> */}
         </div>
 
-        <div className="relative max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[280px_1fr] gap-10 md:gap-16 items-start">
+        <div className="relative max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[240px_1fr] gap-10 md:gap-24 items-start">
 
           {/* Left — Who We're Looking For, vertical list, titles only */}
           <div className="md:sticky md:top-28">
