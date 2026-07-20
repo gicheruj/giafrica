@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Adorn from '../assets/Ecosystem/Adorn.png'
-import Rembeka from '../assets/Ecosystem/Rembeka.jpg'
-import IVA from '../assets/Ecosystem/IVA.jpg'
+import Adorn from '../assets/Home/Adorn.png'
+import Rembeka from '../assets/Home/Rembeka.jpg'
+import IVA from '../assets/Home/IVA.jpg'
 
 const rembekaStats = [
   { value: '2,000+', label: 'Orders Fulfilled' },

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import lead from '../assets/Hero/lead.png'
-import Rembeka from '../assets/Ecosystem/Rembeka.jpg'
-import IVA from '../assets/Ecosystem/IVA.jpg'
-import Adorn from '../assets/Ecosystem/Adorn.png'
-import discoverySlide from '../assets/Hero/innovate.png'
-import insightSlide from '../assets/Hero/lead.png'
-import scaleSlide from '../assets/Hero/transform.png'
+import hero from '../assets/Home/hero.png'
+import Rembeka from '../assets/Home/Rembeka.jpg'
+import IVA from '../assets/Home/IVA.jpg'
+import Adorn from '../assets/Home/Adorn.png'
+import discoverySlide from '../assets/Home/discovery.png'
+import insightSlide from '../assets/Home/insight.png'
+import scaleSlide from '../assets/Home/scale.png'
 
 const stats = [
   { value: '2022', label: 'Operating in Kenya Since' },
@@ -73,15 +73,15 @@ const storySlides = [
     image: discoverySlide,
   },
   {
-    tag: 'Data + Insight',
-    title: 'Every order sharpens the next decision.',
-    text: 'Marketplace signals turn everyday transactions into a clearer picture of demand.',
+    tag: 'Proprietary Innovation',
+    title: 'Insight becomes brand value.',
+    text: 'Market signals guide what to develop, launch and scale next.',
     image: insightSlide,
   },
   {
-    tag: 'Innovation + Scale',
-    title: 'Ideas become proprietary products.',
-    text: 'Validated insight moves from concept to shelf, built for African skin, hair and budgets.',
+    tag: 'Local Relevance',
+    title: 'Ideas designed around real consumers',
+    text: 'Products, Services and Expertise built with context at the center.',
     image: scaleSlide,
   },
 ]
@@ -223,7 +223,7 @@ const Home = () => {
         <div className="flex items-center justify-center px-4 md:px-8 py-6 md:py-10 relative z-10">
           <div className="relative w-full h-[360px] sm:h-[440px] md:h-[500px] lg:h-[560px] rounded-2xl overflow-hidden">
             <img
-              src={lead}
+              src={hero}
               alt="G-Africa Beauty"
               className="absolute inset-0 w-full h-full object-contain"
             />
